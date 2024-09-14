@@ -44,11 +44,13 @@ function addProductToCart(productId) {
   updateCartDisplay();
 }
 
-
-/* Create a function named increaseQuantity that takes in the productId as an argument
-  - increaseQuantity should get the correct product based on the productId
-  - increaseQuantity should then increase the product's quantity
-*/
+// Function to increase the quantity of a product in the cart
+function increaseQuantity(productId) {
+  const product = findProductById(productId);
+  if (product) {
+    product.quantity += 1;
+  }
+}
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
   - decreaseQuantity should get the correct product based on the productId
