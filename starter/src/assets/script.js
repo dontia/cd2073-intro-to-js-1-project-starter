@@ -52,11 +52,16 @@ function increaseQuantity(productId) {
   }
 }
 
-/* Create a function named decreaseQuantity that takes in the productId as an argument
-  - decreaseQuantity should get the correct product based on the productId
-  - decreaseQuantity should decrease the quantity of the product
-  - if the function decreases the quantity to 0, the product is removed from the cart
-*/
+// Function to decrease the quantity of a product
+function decreaseQuantity(productId) {
+  let product = findProductById(productId);
+  if (product) {
+    product.quantity -= 1;
+    if (product.quantity === 0) {
+      cart = cart.filter(p => p.productId !== productId);
+    }
+  }
+}
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
