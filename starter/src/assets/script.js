@@ -143,10 +143,14 @@ function pay(amount) {
   let totalCost = cartTotal();
   if (amount >= totalCost) {
     emptyCart();
-    alert(`Payment successful! Change: $${(amount - totalCost).toFixed(2)}`);
+    // Format the change using formatPrice
+    let formattedChange = formatPrice(amount - totalCost);
+    alert(`Payment successful! Change: ${formattedChange}`);
     return amount - totalCost;
   } else {
-    alert(`Insufficient amount. You need $${(totalCost - amount).toFixed(2)} more.`);
+    // Format the additional amount needed using formatPrice
+    let formattedAdditionalAmount = formatPrice(totalCost - amount);
+    alert(`Insufficient amount. You need ${formattedAdditionalAmount} more.`);
     return amount;
   }
 }
