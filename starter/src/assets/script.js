@@ -120,6 +120,22 @@ emptyCartButton.addEventListener('click', () => {
   updateCartDisplay();
 });
 
+// Generate HTML for each product and insert it into the products element
+const productsElement = document.querySelector(".products");
+
+let productsHtml = '';
+products.forEach(function (product) {
+  productsHtml += `<div class="product">
+  <div>${product.name}</div>
+  <div>${product.price.toFixed(2)}</div>
+  <div>x ${product.quantity}</div>
+  <img src="${product.image}" alt="${product.name}">
+  <button onclick="addProductToCart(${product.productId})">Add to Cart</button>
+  </div>`;
+});
+
+productsElement.innerHTML = productsHtml;
+
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
   - pay will return a negative number if there is a remaining balance
