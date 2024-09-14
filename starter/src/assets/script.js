@@ -105,7 +105,12 @@ function updateCartDisplay() {
   cartTotalElement.innerHTML = `Total: ${formatPrice(totalPrice)}`;
 }
 
-/* Create a function called emptyCart that empties the products from the cart */
+// Function to empty the cart
+function emptyCart() {
+  cart = []; // Clear the cart array
+  updateCartDisplay(); // Update the cart display
+}
+
 
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
