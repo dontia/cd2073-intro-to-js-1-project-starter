@@ -136,12 +136,18 @@ products.forEach(function (product) {
 
 productsElement.innerHTML = productsHtml;
 
-/* Create a function named pay that takes in an amount as an argument
-  - amount is the money paid by customer
-  - pay will return a negative number if there is a remaining balance
-  - pay will return a positive number if money should be returned to customer
-  Hint: cartTotal function gives us cost of all the products in the cart  
-*/
+// Function to handle payment and provide change if the amount is sufficient
+function pay(amount) {
+  let totalCost = cartTotal();
+  if (amount >= totalCost) {
+    emptyCart();
+    alert(`Payment successful! Change: $${(amount - totalCost).toFixed(2)}`);
+    return amount - totalCost;
+  } else {
+    alert(`Insufficient amount. You need $${(totalCost - amount).toFixed(2)} more.`);
+    return amount;
+  }
+}
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
