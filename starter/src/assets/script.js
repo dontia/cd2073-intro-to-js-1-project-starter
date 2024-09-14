@@ -63,11 +63,12 @@ function decreaseQuantity(productId) {
   }
 }
 
-/* Create a function named removeProductFromCart that takes in the productId as an argument
-  - removeProductFromCart should get the correct product based on the productId
-  - removeProductFromCart should update the product quantity to 0
-  - removeProductFromCart should remove the product from the cart
-*/
+// Function to remove a product from the cart
+function removeProductFromCart(productId) {
+  cart = cart.filter(p => p.productId !== productId);
+  updateCartDisplay();
+}
+
 
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total cost of all products
