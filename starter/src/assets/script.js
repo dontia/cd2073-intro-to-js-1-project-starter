@@ -111,6 +111,14 @@ function emptyCart() {
   updateCartDisplay(); // Update the cart display
 }
 
+// Select the empty cart button element
+const emptyCartButton = document.querySelector('.empty-btn button');
+
+// Add event listener to the empty cart button
+emptyCartButton.addEventListener('click', () => {
+  emptyCart(); // Empty the cart when button is clicked
+  updateCartDisplay();
+});
 
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
