@@ -125,9 +125,11 @@ const productsElement = document.querySelector(".products");
 
 let productsHtml = '';
 products.forEach(function (product) {
+  // Use formatPrice to display the product price consistently
+  let formattedPrice = formatPrice(product.price);
   productsHtml += `<div class="product">
   <div>${product.name}</div>
-  <div>${product.price.toFixed(2)}</div>
+  <div>${formattedPrice}</div> 
   <div>x ${product.quantity}</div>
   <img src="${product.image}" alt="${product.name}">
   <button onclick="addProductToCart(${product.productId})">Add to Cart</button>
