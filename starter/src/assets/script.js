@@ -1,19 +1,29 @@
-/* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
+// Array of product objects, each containing details about a specific product
+const products = [
+  {
+    name: "🍓 Strawberry", // Name of the product
+    price: 4.25,          // Price of the product
+    quantity: 0,          // Initial quantity in the cart
+    productId: 1,         // Unique identifier for the product
+    image: "images/strawberry.jpg" // URL of the product image
+  },
+  {
+    name: "🍒 Cherry",
+    price: 5.25,
+    quantity: 0,
+    productId: 2,
+    image: "images/cherry.jpg"
+  },
+  {
+    name: "🍊 Orange",
+    price: 2.25,
+    quantity: 0,
+    productId: 3,
+    image: "images/orange.jpg"
+  }
+];
 
-/* Create 3 or more product objects using object literal notation 
-   Each product should include five properties
-   - name: name of product (string)
-   - price: price of product (number)
-   - quantity: quantity in cart should start at zero (number)
-   - productId: unique id for the product (number)
-   - image: picture of product (url string)
-*/
-
-/* Images provided in /images folder. All images from Unsplash.com
-   - cherry.jpg by Mae Mu
-   - orange.jpg by Mae Mu
-   - strawberry.jpg by Allec Gomes
-*/
+console.log(products);
 
 /* Declare an empty array named cart to hold the items in the cart */
 
@@ -65,15 +75,15 @@
 */
 
 module.exports = {
-   products,
-   cart,
-   addProductToCart,
-   increaseQuantity,
-   decreaseQuantity,
-   removeProductFromCart,
-   cartTotal,
-   pay, 
-   emptyCart,
-   /* Uncomment the following line if completing the currency converter bonus */
-   // currency
+  products,
+  cart,
+  addProductToCart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeProductFromCart,
+  cartTotal,
+  pay,
+  emptyCart,
+  /* Uncomment the following line if completing the currency converter bonus */
+  // currency
 }
