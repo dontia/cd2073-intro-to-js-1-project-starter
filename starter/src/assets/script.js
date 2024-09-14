@@ -69,12 +69,13 @@ function removeProductFromCart(productId) {
   updateCartDisplay();
 }
 
-
-/* Create a function named cartTotal that has no parameters
-  - cartTotal should iterate through the cart to get the total cost of all products
-  - cartTotal should return the total cost of the products in the cart
-  Hint: price and quantity can be used to determine total cost
-*/
+// Function to calculate the total cost of products in the cart (limit to 2 decimal points)
+function cartTotal() {
+  const total = cart.reduce((accumulator, product) => {
+    return accumulator + product.price * product.quantity;
+  }, 0);
+  return parseFloat(total.toFixed(2));
+}
 
 /* Create a function called emptyCart that empties the products from the cart */
 
