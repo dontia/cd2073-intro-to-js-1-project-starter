@@ -82,6 +82,29 @@ function formatPrice(price) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
 }
 
+// Function to update the cart display
+function updateCartDisplay() {
+  const cartElement = document.querySelector(".cart");
+  let cartHtml = '';
+  cart.forEach(function (product) {
+    // Calculate and format the total price for each product
+    let productTotalPrice = formatPrice(product.price * product.quantity);
+    cartHtml += `<div class="cart-product">
+      <div>${product.name}</div>
+      <div>${productTotalPrice}</div>
+      <img src="${product.image}" alt="${product.name}">
+      <button onclick="removeProductFromCart(${product.productId})">Remove</button>
+      </div>`;
+  });
+
+  cartElement.innerHTML = cartHtml;
+
+  // Calculate and display total price
+  const totalPrice = cartTotal();
+  const cartTotalElement = document.querySelector(".cart-total");
+  cartTotalElement.innerHTML = `Total: ${formatPrice(totalPrice)}`;
+}
+
 /* Create a function called emptyCart that empties the products from the cart */
 
 /* Create a function named pay that takes in an amount as an argument
