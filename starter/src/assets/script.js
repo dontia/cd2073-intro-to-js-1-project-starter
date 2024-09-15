@@ -2,21 +2,21 @@
 const products = [
   {
     name: "🍓 Strawberry", // Name of the product
-    price: 4.25,          // Price of the product
+    price: 4,          // Price of the product
     quantity: 0,          // Initial quantity in the cart
     productId: 1,         // Unique identifier for the product
     image: "images/strawberry.jpg" // URL of the product image
   },
   {
     name: "🍒 Cherry",
-    price: 5.25,
+    price: 5,
     quantity: 0,
     productId: 2,
     image: "images/cherry.jpg"
   },
   {
     name: "🍊 Orange",
-    price: 2.25,
+    price: 2,
     quantity: 0,
     productId: 3,
     image: "images/orange.jpg"
@@ -74,7 +74,7 @@ function cartTotal() {
   const total = cart.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
-  return parseFloat(total.toFixed(2));
+  return (total);
 }
 
 // Helper function to format price to two decimal places and as currency
