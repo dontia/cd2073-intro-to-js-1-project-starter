@@ -82,22 +82,40 @@ function formatPrice(price) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
 }
 
+// Helper function to create and append an element with text content
+function createAndAppendElement(parent, tag, className, textContent) {
+  const element = document.createElement(tag);
+  if (className) {
+    element.classList.add(className);
+  }
+  element.textContent = textContent;
+  parent.appendChild(element);
+  return element; // Return the created element for further use if needed
+}
+
 // Function to update the cart display
 function updateCartDisplay() {
   const cartElement = document.querySelector(".cart");
-  let cartHtml = '';
-  cart.forEach(function (product) {
-    // Calculate and format the total price for each product
-    let productTotalPrice = formatPrice(product.price * product.quantity);
-    cartHtml += `<div class="cart-product">
-      <div>${product.name}</div>
-      <div>${productTotalPrice}</div>
-      <img src="${product.image}" alt="${product.name}">
-      <button onclick="removeProductFromCart(${product.productId})">Remove</button>
-      </div>`;
-  });
 
-  cartElement.innerHTML = cartHtml;
+  // Clear the existing content of the cartElement
+  cartElement.innerHTML = ''; // Clear existing content 
+
+  cart.forEach(function (product) {
+    let productTotalPrice = formatPrice(product.price * product.quantity);
+
+    const cartProductDiv = createAndAppendElement(cartElement, 'div', 'cart-product');
+    createAndAppendElement(cartProductDiv, 'div', null, product.name);
+    createAndAppendElement(cartProductDiv, 'div', null, productTotalPrice);
+
+    const productImage = createAndAppendElement(cartProductDiv, 'img', null, null);
+    productImage.src = product.image;
+    productImage.alt = product.name;
+
+    const removeButton = createAndAppendElement(cartProductDiv, 'button', null, 'Remove');
+    removeButton.addEventListener('click', () => {
+      removeProductFromCart(product.productId);
+    });
+  });
 
   // Calculate and display total price
   const totalPrice = cartTotal();
