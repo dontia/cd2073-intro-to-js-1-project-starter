@@ -138,23 +138,26 @@ emptyCartButton.addEventListener('click', () => {
   updateCartDisplay();
 });
 
-// Generate HTML for each product and insert it into the products element
+// Generate product elements dynamically and append them to the products container
 const productsElement = document.querySelector(".products");
 
-let productsHtml = '';
 products.forEach(function (product) {
-  // Use formatPrice to display the product price consistently
   let formattedPrice = formatPrice(product.price);
-  productsHtml += `<div class="product">
-  <div>${product.name}</div>
-  <div>${formattedPrice}</div> 
-  <div>x ${product.quantity}</div>
-  <img src="${product.image}" alt="${product.name}">
-  <button onclick="addProductToCart(${product.productId})">Add to Cart</button>
-  </div>`;
-});
 
-productsElement.innerHTML = productsHtml;
+  const productDiv = createAndAppendElement(productsElement, 'div', 'product');
+  createAndAppendElement(productDiv, 'div', null, product.name);
+  createAndAppendElement(productDiv, 'div', null, formattedPrice);
+  createAndAppendElement(productDiv, 'div', null, `x ${product.quantity}`);
+
+  const productImage = createAndAppendElement(productDiv, 'img', null, null);
+  productImage.src = product.image;
+  productImage.alt = product.name;
+
+  const addToCartButton = createAndAppendElement(productDiv, 'button', null, 'Add to Cart');
+  addToCartButton.addEventListener('click', () => {
+    addProductToCart(product.productId);
+  });
+});
 
 // Function to handle payment and provide change if the amount is sufficient
 function pay(amount) {
