@@ -105,26 +105,16 @@ function pay(amount) {
 
   // If the amount is less than the total cost, show the alert and return the amount
   if (amount < totalCost) {
-    let formattedAdditionalAmount = formatPrice(totalCost - amount);
+    const formattedAdditionalAmount = formatPrice(totalCost - amount);
     alert(`Insufficient amount. You need ${formattedAdditionalAmount} more.`);
     return amount;
-  }
-
-  totalPaid += amount;
-
-  // Calculate the difference between the totalPaid and the cartTotal
-  let remaining = totalPaid - totalCost;
-  // Check if the remaining amount is greater than or equal to zero
-  if (remaining >= 0) {
-    // If so, reset the `totalPaid` to zero to prepare it for the next payment
-    totalPaid = 0;
+  } else {
+    remainingBalance = 0; // Reset remaining balance after successful payment
     emptyCart();
-    // Format the change using formatPrice
-    let formattedChange = formatPrice(remaining);
+    const formattedChange = formatPrice(amount - totalCost);
     alert(`Payment successful! Change: ${formattedChange}`);
+    return amount - totalCost; // Return positive change
   }
-  // Return the remaining amount
-  return remaining;
 }
 
 
