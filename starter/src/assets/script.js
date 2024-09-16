@@ -69,7 +69,7 @@ function removeProductFromCart(productId) {
   updateCartDisplay();
 }
 
-// Function to calculate the total cost of products in the cart (limit to 2 decimal points)
+// Function to calculate the total cost of products in the cart
 function cartTotal() {
   const total = cart.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
@@ -159,19 +159,33 @@ products.forEach(function (product) {
   });
 });
 
+// Variable to track total amount paid
+let totalPaid = 0;
+
 // Function to handle payment and provide change if the amount is sufficient
 function pay(amount) {
-  let totalCost = cartTotal();
-  if (amount >= totalCost) {
-    emptyCart();
-    // Format the change using formatPrice
-    let formattedChange = formatPrice(amount - totalCost);
-    alert(`Payment successful! Change: ${formattedChange}`);
-    return amount - totalCost;
-  } else {
-    // Format the additional amount needed using formatPrice
+  const totalCost = cartTotal();
+
+  // If the amount is less than the total cost, show the alert and return the amount
+  if (amount < totalCost) {
     let formattedAdditionalAmount = formatPrice(totalCost - amount);
     alert(`Insufficient amount. You need ${formattedAdditionalAmount} more.`);
     return amount;
   }
+
+  totalPaid += amount;
+
+  // Calculate the difference between the totalPaid and the cartTotal
+  let remaining = totalPaid - totalCost;
+  // Check if the remaining amount is greater than or equal to zero
+  if (remaining >= 0) {
+    // If so, reset the `totalPaid` to zero to prepare it for the next payment
+    totalPaid = 0;
+    emptyCart();
+    // Format the change using formatPrice
+    let formattedChange = formatPrice(remaining);
+    alert(`Payment successful! Change: ${formattedChange}`);
+  }
+  // Return the remaining amount
+  return remaining;
 }
