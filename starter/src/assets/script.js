@@ -80,17 +80,6 @@ function formatPrice(price) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
 }
 
-// Helper function to create and append an element with text content
-function createAndAppendElement(parent, tag, className, textContent) {
-  const element = document.createElement(tag);
-  if (className) {
-    element.classList.add(className);
-  }
-  element.textContent = textContent;
-  parent.appendChild(element);
-  return element; // Return the created element for further use if needed
-}
-
 // Function to empty the cart
 function emptyCart() {
   cart = []; // Clear the cart array
@@ -106,24 +95,6 @@ emptyCartButton.addEventListener('click', () => {
 
 // Generate product elements dynamically and append them to the products container
 const productsElement = document.querySelector(".products");
-
-products.forEach(function (product) {
-  let formattedPrice = formatPrice(product.price);
-
-  const productDiv = createAndAppendElement(productsElement, 'div', 'product');
-  createAndAppendElement(productDiv, 'div', null, product.name);
-  createAndAppendElement(productDiv, 'div', null, formattedPrice);
-  createAndAppendElement(productDiv, 'div', null, `x ${product.quantity}`);
-
-  const productImage = createAndAppendElement(productDiv, 'img', null, null);
-  productImage.src = product.image;
-  productImage.alt = product.name;
-
-  const addToCartButton = createAndAppendElement(productDiv, 'button', null, 'Add to Cart');
-  addToCartButton.addEventListener('click', () => {
-    addProductToCart(product.productId);
-  });
-});
 
 // Variable to track total amount paid
 let totalPaid = 0;
