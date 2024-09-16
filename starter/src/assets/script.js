@@ -41,7 +41,6 @@ function addProductToCart(productId) {
     }
     increaseQuantity(productId);
   }
-  updateCartDisplay();
 }
 
 // Function to increase the quantity of a product in the cart
@@ -66,7 +65,6 @@ function decreaseQuantity(productId) {
 // Function to remove a product from the cart
 function removeProductFromCart(productId) {
   cart = cart.filter(p => p.productId !== productId);
-  updateCartDisplay();
 }
 
 // Function to calculate the total cost of products in the cart
@@ -93,40 +91,9 @@ function createAndAppendElement(parent, tag, className, textContent) {
   return element; // Return the created element for further use if needed
 }
 
-// Function to update the cart display
-function updateCartDisplay() {
-  const cartElement = document.querySelector(".cart");
-
-  // Clear the existing content of the cartElement
-  cartElement.innerHTML = ''; // Clear existing content 
-
-  cart.forEach(function (product) {
-    let productTotalPrice = formatPrice(product.price * product.quantity);
-
-    const cartProductDiv = createAndAppendElement(cartElement, 'div', 'cart-product');
-    createAndAppendElement(cartProductDiv, 'div', null, product.name);
-    createAndAppendElement(cartProductDiv, 'div', null, productTotalPrice);
-
-    const productImage = createAndAppendElement(cartProductDiv, 'img', null, null);
-    productImage.src = product.image;
-    productImage.alt = product.name;
-
-    const removeButton = createAndAppendElement(cartProductDiv, 'button', null, 'Remove');
-    removeButton.addEventListener('click', () => {
-      removeProductFromCart(product.productId);
-    });
-  });
-
-  // Calculate and display total price
-  const totalPrice = cartTotal();
-  const cartTotalElement = document.querySelector(".cart-total");
-  cartTotalElement.innerHTML = `Total: ${formatPrice(totalPrice)}`;
-}
-
 // Function to empty the cart
 function emptyCart() {
   cart = []; // Clear the cart array
-  updateCartDisplay(); // Update the cart display
 }
 
 // Select the empty cart button element
@@ -135,7 +102,6 @@ const emptyCartButton = document.querySelector('.empty-btn button');
 // Add event listener to the empty cart button
 emptyCartButton.addEventListener('click', () => {
   emptyCart(); // Empty the cart when button is clicked
-  updateCartDisplay();
 });
 
 // Generate product elements dynamically and append them to the products container
