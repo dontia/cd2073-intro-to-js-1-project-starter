@@ -24,7 +24,6 @@ const products = [
 ];
 
 // Empty array to hold the products in the cart
-
 let cart = [];
 
 // Helper function to find a product by its ID
@@ -34,7 +33,7 @@ function findProductById(productId) {
 
 // Function to add a product to the cart
 function addProductToCart(productId) {
-  let product = findProductById(productId);
+  const product = findProductById(productId);
   if (product) {
     if (!cart.includes(product)) {
       cart.push(product);
@@ -53,7 +52,7 @@ function increaseQuantity(productId) {
 
 // Function to decrease the quantity of a product
 function decreaseQuantity(productId) {
-  let product = findProductById(productId);
+  const product = findProductById(productId);
   if (product) {
     product.quantity -= 1;
     if (product.quantity === 0) {
