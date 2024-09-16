@@ -1,21 +1,21 @@
 // Array of product objects, each containing details about a specific product
 const products = [
   {
-    name: "🍓 Strawberry", // Name of the product
+    name: "Strawberry", // Name of the product
     price: 4,          // Price of the product
     quantity: 0,          // Initial quantity in the cart
     productId: 1,         // Unique identifier for the product
     image: "images/strawberry.jpg" // URL of the product image
   },
   {
-    name: "🍒 Cherry",
+    name: "Cherry",
     price: 5,
     quantity: 0,
     productId: 2,
     image: "images/cherry.jpg"
   },
   {
-    name: "🍊 Orange",
+    name: "Orange",
     price: 2,
     quantity: 0,
     productId: 3,
