@@ -26,6 +26,9 @@ const products = [
 // Empty array to hold the products in the cart
 let cart = [];
 
+// Variable to keep track of the total amount paid
+let totalPaid = 0;
+
 // Helper function to find a product by its ID
 function findProductById(productId) {
   return products.find(p => p.productId === productId);
@@ -66,18 +69,6 @@ function removeProductFromCart(productId) {
   cart = cart.filter(p => p.productId !== productId);
 }
 
-// Function to calculate the total cost of products in the cart
-function cartTotal() {
-  const total = cart.reduce((accumulator, product) => {
-    return accumulator + product.price * product.quantity;
-  }, 0);
-  return (total);
-}
-
-// Helper function to format price to two decimal places and as currency
-function formatPrice(price) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-}
 
 // Function to empty the cart
 function emptyCart() {
@@ -95,25 +86,44 @@ emptyCartButton.addEventListener('click', () => {
 // Generate product elements dynamically and append them to the products container
 const productsElement = document.querySelector(".products");
 
-// Variable to track total amount paid
-let totalPaid = 0;
 
-// Function to handle payment and provide change if the amount is sufficient
-function pay(amount) {
-  const totalCost = cartTotal();
+/**
+ * Function to calculate the total cost of items in the cart
+ * @returns {number} - The total cost of items in the cart
+ */
+function cartTotal() {
+  // Initialize a variable to hold the total
+  let total = 0;
 
-  // If the amount is less than the total cost, show the alert and return the amount
-  if (amount < totalCost) {
-    const formattedAdditionalAmount = formatPrice(totalCost - amount);
-    alert(`Insufficient amount. You need ${formattedAdditionalAmount} more.`);
-    return amount;
-  } else {
-    remainingBalance = 0; // Reset remaining balance after successful payment
-    emptyCart();
-    const formattedChange = formatPrice(amount - totalCost);
-    alert(`Payment successful! Change: ${formattedChange}`);
-    return amount - totalCost; // Return positive change
+  // Iterate through the cart and sum up the product prices multiplied by their quantities
+  for (const item of cart) {
+    total += item.price * item.quantity;
   }
+
+  return total; // Return the total cost
+}
+
+
+/**
+ * Function to handle payment
+ * @param {number} amount - The amount paid by the user
+ * @returns {number} - The remaining balance or change
+ */
+function pay(amount) {
+  // Add the payment amount to the total paid
+  totalPaid += amount;
+
+  // Calculate the remaining balance or change
+  let balance = totalPaid - cartTotal();
+
+  // Check if the remaining amount is greater than or equal to zero
+  if (balance >= 0) {
+
+    totalPaid = 0;  // Reset for the next payment
+    emptyCart();
+
+  }
+  return balance;  // Return the balance or change
 }
 
 
