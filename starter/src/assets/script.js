@@ -1,10 +1,10 @@
 // Array of product objects, each containing details about a specific product
 const products = [
   {
-    name: "Strawberry", // Name of the product
-    price: 4,          // Price of the product
-    quantity: 0,          // Initial quantity in the cart
-    productId: 1,         // Unique identifier for the product
+    name: "Strawberry",  // Name of the product
+    price: 4,  //Price of the product
+    quantity: 0,  // Initial quantity in the cart
+    productId: 1,  // Unique identifier for the product
     image: "images/strawberry.jpg" // URL of the product image
   },
   {
@@ -23,18 +23,29 @@ const products = [
   }
 ];
 
+
 // Empty array to hold the products in the cart
 let cart = [];
+
 
 // Variable to keep track of the total amount paid
 let totalPaid = 0;
 
-// Helper function to find a product by its ID
+
+/**
+   * Helper function to find a product by its ID
+   * @param {number} productId - The unique identifier of the product
+   * @returns {object} - The product object if found, otherwise undefined
+   */
 function findProductById(productId) {
   return products.find(p => p.productId === productId);
 }
 
-// Function to add a product to the cart
+
+/**
+ * Function to add a product to the cart
+ * @param {number} productId - The unique identifier of the product to be added
+ */
 function addProductToCart(productId) {
   const product = findProductById(productId);
   if (product) {
@@ -45,7 +56,11 @@ function addProductToCart(productId) {
   }
 }
 
-// Function to increase the quantity of a product in the cart
+
+/**
+ * Function to increase the quantity of a product in the cart
+ * @param {number} productId - The unique identifier of the product
+ */
 function increaseQuantity(productId) {
   const product = findProductById(productId);
   if (product) {
@@ -53,7 +68,11 @@ function increaseQuantity(productId) {
   }
 }
 
-// Function to decrease the quantity of a product
+
+/**
+ * Function to decrease the quantity of a product
+ * @param {number} productId - The unique identifier of the product
+ */
 function decreaseQuantity(productId) {
   const product = findProductById(productId);
   if (product) {
@@ -64,24 +83,33 @@ function decreaseQuantity(productId) {
   }
 }
 
-// Function to remove a product from the cart
+
+/**
+ * Function to remove a product from the cart
+ * @param {number} productId - The unique identifier of the product to be removed
+ */
 function removeProductFromCart(productId) {
   cart = cart.filter(p => p.productId !== productId);
 }
 
 
-// Function to empty the cart
+/**
+ * Function to empty the cart
+ */
 function emptyCart() {
   cart = []; // Clear the cart array
 }
 
+
 // Select the empty cart button element
 const emptyCartButton = document.querySelector('.empty-btn button');
+
 
 // Add event listener to the empty cart button
 emptyCartButton.addEventListener('click', () => {
   emptyCart(); // Empty the cart when button is clicked
 });
+
 
 // Generate product elements dynamically and append them to the products container
 const productsElement = document.querySelector(".products");
@@ -99,7 +127,6 @@ function cartTotal() {
   for (const item of cart) {
     total += item.price * item.quantity;
   }
-
   return total; // Return the total cost
 }
 
@@ -118,10 +145,8 @@ function pay(amount) {
 
   // Check if the remaining amount is greater than or equal to zero
   if (balance >= 0) {
-
     totalPaid = 0;  // Reset for the next payment
     emptyCart();
-
   }
   return balance;  // Return the balance or change
 }
